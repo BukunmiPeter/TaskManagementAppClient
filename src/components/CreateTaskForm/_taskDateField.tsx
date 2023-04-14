@@ -1,19 +1,36 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { TextField } from '@mui/material';
-export const TaskDateField: FC = (): ReactElement => {
-  const [date, setDate] = useState<Date | null>(null);
+
+import { IDateField } from './interfaces/IDateField';
+import PropTypes from 'prop-types';
+export const TaskDateField: FC<IDateField> = (
+  props
+): ReactElement => {
+  const {
+    value = new Date(),
+    disabled = false,
+    onChange = (date) => console.log(date),
+  } = props;
+  //   const [date, setDate] = useState<Date | null>(null);
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label="Task Date"
         format="dd/MM/yyyy"
-        value={date}
-        onChange={(newValue) => setDate(newValue)}
+        // value={date}
+        value={value}
+        disabled={disabled}
+        onChange={onChange}
+        // onChange={(newValue) => setDate(newValue)}
       />
     </LocalizationProvider>
   );
+};
+TaskDateField.propTypes = {
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  value: PropTypes.instanceOf(Date),
 };
