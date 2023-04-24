@@ -4,6 +4,7 @@ import format from 'date-fns/format';
 import { TaskCounter } from '../TaskCounter/TaskCounter';
 import PropTypes from 'prop-types';
 import { Status } from '../CreateTaskForm/enums/Status';
+import { Task } from '../task/task';
 export const TaskArea: FC = (): ReactElement => {
   return (
     <Grid item md={8} px={4}>
@@ -45,8 +46,9 @@ export const TaskArea: FC = (): ReactElement => {
           md={8}
           xs={10}
         >
-          <Box> Tasks will come over here</Box>
-          <Box> Tasks will come over here</Box>
+          <Task />
+          <Task />
+          <Task />
         </Grid>
       </Grid>
     </Grid>
